@@ -24,9 +24,10 @@ kube-board is a simple web-based utility built with Golang and Kubernetes client
    ./kube-board
    ```
 - Or build the Dockerfile:
+   # NOTE: Currently the Dockerfile runs as root (not very safe). Work in Progress
    ```bash
    docker build -t kube-board:latest .
-   docker run -d -p 8080:8080 kube-board:latest
+   docker run -p 8080:8080 -v ~/.kube/config:/root/.kube/config kube-board:latest
    ```
 
 ## ⎈ Usage

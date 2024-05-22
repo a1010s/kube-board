@@ -1,5 +1,5 @@
 # Use a specific Go version as the base image
-FROM golang:1.17-alpine AS build
+FROM golang:latest AS build
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN go mod init kube-board
 RUN go mod tidy
 
 # Build the Go app with necessary flags
-RUN go build -o kube-board .
+RUN CGO_ENABLED=0 GOOS=linux go build -o kube-board .
 
 # Start a new stage from scratch
 FROM alpine:latest
