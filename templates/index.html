@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pod Health Check</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #00ffcc;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #1f1f1f;
+        }
+        tr:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        tr:nth-child(odd) {
+            background-color: #2a2a2a;
+        }
+        th, td {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        th:hover, td:hover {
+            background-color: #00ffcc;
+            color: #121212;
+        }
+        .container-status {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pod Health Check</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Namespace</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Message</th>
+            <th>Containers</th>
+        </tr>
+        {{range .}}
+        <tr>
+            <td>{{.Name}}</td>
+            <td>{{.Namespace}}</td>
+            <td>{{.Status}}</td>
+            <td>{{.Reason}}</td>
+            <td>{{.Message}}</td>
+            <td>
+                {{range .ContainerStatus}}
+                <div class="container-status">{{.Name}} - Ready: {{.Ready}}</div>
+                {{end}}
+            </td>
+        </tr>
+        {{end}}
+    </table>
+    <script>
+        function fetchPodData() {
+            fetch(window.location.href, { method: 'GET' })
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newTable = doc.getElementById('podTable');
+                    document.getElementById('podTable').innerHTML = newTable.innerHTML;
+                })
+                .catch(error => console.error('Error fetching pod data:', error));
+        }
+
+        setInterval(fetchPodData, 10000); // Refresh every 10 seconds
+    </script>
+</body>
+</html>
+
