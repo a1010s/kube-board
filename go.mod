@@ -1,6 +1,8 @@
 module github.com/a1010s/kube-board
 
-go 1.22
+go 1.22.0
+
+toolchain go1.22.2
 
 require (
 	k8s.io/api v0.30.1
