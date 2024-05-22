@@ -22,6 +22,10 @@ WORKDIR /root/
 # Copy the Pre-built binary file from the previous stage
 COPY --from=build /app/kube-board .
 
+# Copy templates directory
+COPY templates/ /root/templates/
+
+
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
