@@ -18,7 +18,7 @@ kube-board is a simple web-based utility built with Golang and Kubernetes client
 - Clone the kube-board repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/kube-board.git
+   git clone https://github.com/a1010s/kube-board.git
 
    go build
 
