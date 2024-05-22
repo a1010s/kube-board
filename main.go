@@ -60,7 +60,7 @@ func main() {
 		log.Fatalf("Error creating Kubernetes clientset: %s", err.Error())
 	}
 
-	http.HandleFunc("/", podHandler)
+	http.HandleFunc("/pod", podHandler)
 	http.HandleFunc("/deploy", deployHandler)
 
 	go startScanning(10 * time.Second)

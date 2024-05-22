@@ -1,4 +1,4 @@
-module github.com/a1010s/k8s-utility
+module github.com/a1010s/kube-board
 
 go 1.22.2
 
