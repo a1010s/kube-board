@@ -23,7 +23,11 @@ kube-board is a simple web-based utility built with Golang and Kubernetes client
    go build
    ./kube-board
    ```
-
+- Or build the Dockerfile:
+   ```bash
+   docker build -t kube-board:latest .
+   docker run -d -p 8080:8080 kube-board:latest
+   ```
 
 ## ⎈ Usage
 - Navigate to http://localhost:8080/pod to view information about pods in the Kubernetes cluster.
